@@ -10,7 +10,7 @@ import {
 
 export function CreateProjectsScene(engine: Engine, canvas: HTMLCanvasElement) {
   const scene = new Scene(engine);
-  scene.clearColor = new Color4(1, 1, 1, 1); // fundo branco (mescla com site)
+  scene.clearColor = new Color4(.29, .29, .29, 1); // fundo branco (mescla com site)
 
   const camera = new ArcRotateCamera(
     "camera",
