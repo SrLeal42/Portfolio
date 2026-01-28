@@ -4,9 +4,9 @@ html {
 }
 
 .container {
-  display: flex;              /* ativa flexbox */
-  flex-direction: column;     /* empilha título + parágrafo */
-  justify-content: center;    /* centraliza verticalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center; 
   
   padding: 50px 20px 40px;
@@ -96,7 +96,7 @@ html {
 
   width: 75%; 
   height: fit-content;
-  min-height: 500px;
+  min-height: 400px;
 
   margin-top: 50px;
 
@@ -129,12 +129,39 @@ html {
 .paragraphSobreMim a {
   color: var(--color-accent);
   text-decoration: underline;
-  text-underline-offset: 3px;   /* afasta a linha do texto */
-  text-decoration-thickness: 1px; /* espessura mais moderna */
-  font-weight: 600;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  /* font-weight: 600; */
 
   transition: color 0.2s ease;
 }
+
+
+.containerTechnology {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+
+  width: 100%;
+  min-width: fit-content;
+  height: fit-content;
+  min-height: 60px;
+
+  gap: 70px;
+  flex-wrap: wrap;  
+
+  margin-top: 50px;
+
+}
+
+.technologyIcon {
+  /* fill: currentColor; */
+  color: var(--color-text);
+  height: 35px;
+  width: 35px;
+}
+
+
 
 
 .babylonSection {
