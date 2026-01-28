@@ -1,0 +1,30 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+
+:root {
+  /* 🎨 Cores */
+  --color-bg: rgb(20, 20, 20);
+  --color-text: rgb(231, 255, 255);
+  --color-muted: #a0a0a0;
+  --color-accent: #ff6a6a;
+  --color-line: #ddd;
+  --color-contact-hover: #2e2e2e;
+
+  /* 🔤 Tipografia */
+  --font-main: 'IBM Plex Sans', sans-serif;
+  --font-size-title: 4.5rem;
+  /* --font-size-subtitle: 3.5rem;
+  --font-size-body: 1.2rem; */
+
+  /* 📏 Espaçamento */
+  --spacing-section: 60px;
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 40px;
+
+  /* 🔲 Bordas */
+  --radius-soft: 8px;
+}
