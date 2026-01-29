@@ -24,5 +24,5 @@ export function BabylonScene() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", height: "600px" }} />;
+  return <canvas ref={canvasRef} style={{ width: "100%", height: "800px" }} />;
 }

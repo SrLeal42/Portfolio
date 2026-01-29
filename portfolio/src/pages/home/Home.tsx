@@ -16,6 +16,9 @@ import SQLIcon from "../../assets/icons/sql-icon.svg?react";
 import MongoIcon from "../../assets/icons/mongodb-icon.svg?react";
 import NodeIcon from "../../assets/icons/nodejs-icon.svg?react";
 import CondaIcon from "../../assets/icons/conda-icon.svg?react";
+import GitIcon from "../../assets/icons/git-icon.svg?react";
+import BabylonIcon from "../../assets/icons/babylon-icon.svg?react";
+import DownArrowIcon from "../../assets/icons/down-arrow-icon.svg?react";
 
 
 import { BabylonScene } from "../../components/BabylonScene";
@@ -101,6 +104,8 @@ export function Home() {
         <section className={styles.containerTechnology}>
           <div title="SQL" aria-label="SQL"> <SQLIcon className={styles.technologyIcon} /></div>
           <div title="MongoDB" aria-label="MongoDB"><MongoIcon className={styles.technologyIcon}/></div>
+          <div title="Babylon.js" aria-label="Babylon.js"><BabylonIcon className={`${styles.technologyIcon} ${styles.babylonIcon}`} id="BABY"/></div>
+          {/* <div title="React" aria-label="React"><ReactIcon className={styles.technologyIcon}/></div> */}
           <div title="Python" aria-label="Python"><PythonIcon className={styles.technologyIcon} /></div>
           <div title="Java" aria-label="Java"><JavaIcon className={styles.technologyIcon}/></div>
           <div title="HTML" aria-label="HTML"><HTMLIcon className={styles.technologyIcon} /></div>
@@ -108,16 +113,22 @@ export function Home() {
           <div title="CSS" aria-label="CSS"><CSSIcon className={styles.technologyIcon} /></div>
           <div title="PHP" aria-label="PHP"><PHPIcon className={styles.technologyIcon} /></div>
           <div title="C#" aria-label="C#"><CSharpIcon className={styles.technologyIcon} /></div>
+          <div title="Git" aria-label="Git"><GitIcon className={styles.technologyIcon} /></div>
           <div title="NodeJS" aria-label="NodeJS"><NodeIcon className={styles.technologyIcon} /></div>
           <div title="Conda" aria-label="Conda"><CondaIcon className={styles.technologyIcon} /></div>
         </section>
 
-      
+        
       
       </section>
 
-      <section className={styles.babylonSection} >
-        <BabylonScene />
+      <section className={styles.containerProject}>
+              <DownArrowIcon className={styles.downArrowIcon}/>
+        <h1 className={styles.titleProject}>Projetos</h1>
+
+        <section className={styles.babylonSection} >
+          <BabylonScene />
+        </section>
       </section>
     </>
   );
