@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@babylonjs/core": "^8.47.0",
-    "@babylonjs/loaders": "^8.47.0",
+    "@babylonjs/core": "^6.49.0",
+    "@babylonjs/loaders": "^6.49.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

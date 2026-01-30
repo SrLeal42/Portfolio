@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Engine, Scene } from "@babylonjs/core";
+import "@babylonjs/loaders/glTF";
+
 import { CreateProjectsScene } from "../scenes/ProjectsScene";
+
+import styles from "../pages//home/Home.module.css";
 
 export function BabylonScene() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -9,20 +13,38 @@ export function BabylonScene() {
     if (!canvasRef.current) return;
 
     const engine = new Engine(canvasRef.current, true);
-    const scene: Scene = CreateProjectsScene(engine, canvasRef.current);
+    let scene: Scene | null = null;
+    let isMounted = true;
+    // let isDisposed = false;
 
-    engine.runRenderLoop(() => {
-      scene.render();
-    });
+    const initScene = async () => {
+      const createdScene = await CreateProjectsScene(engine, canvasRef.current!);
+
+      // if (!isMounted) return;
+
+      scene = createdScene;
+
+      if (!isMounted) {
+        scene.dispose();
+        return;
+      }
+      
+      engine.runRenderLoop(() => {
+        scene?.render();
+      });
+    };
+
+    initScene();
 
     const resize = () => engine.resize();
     window.addEventListener("resize", resize);
 
     return () => {
+      isMounted = false;
       window.removeEventListener("resize", resize);
       engine.dispose();
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", height: "800px" }} />;
+  return <canvas ref={canvasRef} className={styles.canvasBabylon}  />;
 }
