@@ -15,12 +15,9 @@ export function BabylonScene() {
     const engine = new Engine(canvasRef.current, true);
     let scene: Scene | null = null;
     let isMounted = true;
-    // let isDisposed = false;
-
+   
     const initScene = async () => {
       const createdScene = await CreateProjectsScene(engine, canvasRef.current!);
-
-      // if (!isMounted) return;
 
       scene = createdScene;
 

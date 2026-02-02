@@ -10,7 +10,8 @@ let eng: B.Engine;
 
 let projectMeshes : B.TransformNode[];
 
-let hoverLight : B.PointLight;
+
+// let hoverLight : B.PointLight;
 
 export async function CreateProjectsScene(engine: B.Engine, canvas: HTMLCanvasElement) {
   eng = engine;
@@ -22,7 +23,7 @@ export async function CreateProjectsScene(engine: B.Engine, canvas: HTMLCanvasEl
   CreateLights(scene, false);
   
   projectMeshes = await CreateProjectsModels(scene);
-  
+
   AttachModelAnimations(scene, projectMeshes);
 
   engine.onResizeObservable.add(() => {
@@ -67,9 +68,9 @@ function CreateLights(scene:B.Scene, gizmos=false) : B.PointLight {
   light2.intensity = 2;
 
   // Criando a HoverLight
-  hoverLight = new B.PointLight("hoverLight", new B.Vector3(0, 0, 0), scene);
-  hoverLight.intensity = 0;
-  hoverLight.radius = 10;
+  // hoverLight = new B.PointLight("hoverLight", new B.Vector3(0, 0, 0), scene);
+  // hoverLight.intensity = 0;
+  // hoverLight.radius = 10;
 
   if (gizmos) {
     const lightGizmo = new LightGizmo();
@@ -200,9 +201,10 @@ function AttachModelAnimations(scene:B.Scene, projectMeshes: B.TransformNode[]) 
       
       // ------- OUTLINE -------
       const meshes = mesh.metadata.meshes as B.AbstractMesh[];
+      const isHovered = mesh === hoveredMesh;
       for (const m of meshes) {
         const current = mesh.metadata.outlineWidthCurrent as number;
-        const target  = mesh === hoveredMesh ? C.WIDTH_OUTLINE : 0;
+        const target  = isHovered ? C.WIDTH_OUTLINE : 0;
 
         const next = B.Scalar.Lerp(current, target, C.VEL_OUTLINE);
 
@@ -212,15 +214,6 @@ function AttachModelAnimations(scene:B.Scene, projectMeshes: B.TransformNode[]) 
         m.outlineColor = new B.Color3(...C.COLOR_OUTLINE);
         m.renderOutline = next > 0.001; // só ativa quando visível
       }
-
-      // if (hoveredMesh) {
-      //   const pos = hoveredMesh.getAbsolutePosition();
-
-      //   hoverLight.position = B.Vector3.Lerp(hoverLight.position, pos, 0.1);
-      //   hoverLight.intensity = B.Scalar.Lerp(hoverLight.intensity, 3, 0.1);
-      // } else {
-      //   hoverLight.intensity = B.Scalar.Lerp(hoverLight.intensity, 0, 0.1);
-      // }
 
     }
     

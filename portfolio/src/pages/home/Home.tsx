@@ -1,3 +1,4 @@
+import "../global.css";
 import styles from "./Home.module.css";
 
 import EmailIcon from "../../assets/icons/email-icon.svg?react";

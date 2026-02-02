@@ -7,15 +7,20 @@
 :root {
   /* 🎨 Cores */
   --color-bg: rgb(20, 20, 20);
+  --color-scrollbar: #202020;
+  --color-scrollbar-hover: #292929;
   --color-text: rgb(231, 255, 255);
   --color-muted: #a0a0a0;
   --color-accent: #ff6a6a;
   --color-line: #ddd;
   --color-contact-hover: #2e2e2e;
 
+  --scrollbar-size: 15px;
+
+
   /* 🔤 Tipografia */
   --font-main: 'IBM Plex Sans', sans-serif;
-  --font-size-title: 4.5rem;
+  --font-size-title: 5rem;
   /* --font-size-subtitle: 3.5rem;
   --font-size-body: 1.2rem; */
 

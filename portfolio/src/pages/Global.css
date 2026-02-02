@@ -1,0 +1,28 @@
+
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 6px;
+  background-clip: content-box;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
+
+}
+
+
+  /* BARRA DE ROLAGEM FIREFOX */
+/* html {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-scrollbar-hover) transparent;
+} */
