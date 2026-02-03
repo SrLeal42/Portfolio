@@ -3,7 +3,7 @@ import * as B from "@babylonjs/core";
 import { LightGizmo } from "@babylonjs/core/Gizmos/lightGizmo";
 
 import * as C from '../constants/Constants';
-import { Normalize } from "../assets/OtherScripts";
+import { Normalize, SetCursor } from "../assets/OtherScripts";
 // import { type ProjectData } from "../interfaces/ProjectData";
 
 let eng: B.Engine;
@@ -117,11 +117,12 @@ async function CreateProjectsModels(scene : B.Scene) : Promise<B.TransformNode[]
       const renderMeshes = result.meshes.filter(m => m.getTotalVertices() > 0);
       
       pivot.metadata = {
+        url: project.url,
         basePosition: project.position,
         baseScale: project.scale,
         root: rootMesh,
         meshes: renderMeshes,
-        outlineWidthCurrent: 0
+        outlineWidthCurrent: 0,
       };
 
       projectMeshes.push(pivot); // a lista guarda pivôs
@@ -157,31 +158,51 @@ export async function LoadJson(path: string): Promise<any> {
 function AttachModelAnimations(scene:B.Scene, projectMeshes: B.TransformNode[]) : void {
   
   let hoveredMesh: B.AbstractMesh | null = null;
+  const canvas = scene.getEngine().getRenderingCanvas();
 
   scene.onPointerObservable.add((pointerInfo) => {
+
+    const pick =  scene.pick(scene.pointerX, scene.pointerY); // pointerInfo.pickInfo ||
+    const pickedMesh = pick?.hit && pick.pickedMesh ? pick.pickedMesh : null;
+
+    if (pointerInfo.type === B.PointerEventTypes.POINTERMOVE) {      
+      if (pickedMesh) {
+          
+          const pivot = FindRootInMesh(pickedMesh, projectMeshes);
+
+          if (pivot) {
     
-    if (pointerInfo.type === B.PointerEventTypes.POINTERMOVE) {
-  
-      const pick = scene.pick(scene.pointerX, scene.pointerY);
-
-      if (pick?.hit && pick.pickedMesh) {
-        const root = pick.pickedMesh;
-
-        let pivot = root;
-        while (pivot.parent && !projectMeshes.includes(pivot)) {
-          pivot = pivot.parent as B.AbstractMesh;
+            hoveredMesh = pivot;
+            pivot.metadata = pivot.metadata || {};
+            pivot.metadata.hoverPoint = pick!.pickedPoint;
+            SetCursor(canvas, "pointer");
+    
+          } else {
+    
+            hoveredMesh = null;
+            SetCursor(canvas, "default");
+    
+          }
+      
+        } else {
+          hoveredMesh = null;
+          SetCursor(canvas, "default");
         }
 
-        hoveredMesh = pivot;
-
-        pivot.metadata.hoverPoint = pick.pickedPoint;
-  
-      } else {
-        hoveredMesh = null;
-      }
-  
+        return;
     }
-  
+
+    if (pointerInfo.type === B.PointerEventTypes.POINTERPICK && pickedMesh) {
+        const meshWithUrl = FindRootInMesh(pickedMesh, projectMeshes);
+        
+        if (meshWithUrl?.metadata?.url) {
+            window.dispatchEvent(
+                new CustomEvent("project-click", { detail: meshWithUrl.metadata.url })
+            );
+        }
+    }  
+
+
   });
 
 
@@ -221,6 +242,17 @@ function AttachModelAnimations(scene:B.Scene, projectMeshes: B.TransformNode[]) 
 
 }
 
+function FindRootInMesh(mesh: B.AbstractMesh, validMeshes: B.TransformNode[]): B.AbstractMesh | null {
+ 
+  let current : B.AbstractMesh | B.TransformNode | null = mesh;
+  
+  while (current && !validMeshes.includes(current)) {
+      current = current.parent as B.AbstractMesh;
+  }
+  
+  return current as B.AbstractMesh;
+}
+
 
 function UpdateResponsiveLayout() : void {
 
@@ -245,6 +277,4 @@ function UpdateResponsiveLayout() : void {
   }
 
 }
-
-
 

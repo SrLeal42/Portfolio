@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 import "../global.css";
 import styles from "./Home.module.css";
 
@@ -25,11 +28,22 @@ import DownArrowIcon from "../../assets/icons/down-arrow-icon.svg?react";
 import { BabylonScene } from "../../components/BabylonScene";
 
 export function Home() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    function handleProjectClick(e: any) {
+      navigate(e.detail); // "/meu-projeto"
+    }
+
+    window.addEventListener("project-click", handleProjectClick);
+    return () => window.removeEventListener("project-click", handleProjectClick);
+  }, [navigate]);
+  
+  
   return (
     <>
       <section className={styles.container} >
         <h1 className={styles.name}>João Gabriel Leal</h1>
-        {/* <p className={styles.subtitle}>Full-Stack Developer</p> */}
         <div className={styles.line} />
         
         <section className={styles.contactSection}> 
