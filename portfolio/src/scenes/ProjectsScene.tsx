@@ -192,7 +192,7 @@ function AttachModelAnimations(scene:B.Scene, projectMeshes: B.TransformNode[]) 
         return;
     }
 
-    if (pointerInfo.type === B.PointerEventTypes.POINTERPICK && pickedMesh) {
+    if (pointerInfo.type === B.PointerEventTypes.POINTERDOWN && pickedMesh) {
         const meshWithUrl = FindRootInMesh(pickedMesh, projectMeshes);
         
         if (meshWithUrl?.metadata?.url) {

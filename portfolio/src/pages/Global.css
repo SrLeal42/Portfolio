@@ -1,4 +1,7 @@
-
+html {
+  font-family: var(--font-paragraph);
+  background-color: var(--color-bg);
+}
 
 ::-webkit-scrollbar {
   width: var(--scrollbar-size);
